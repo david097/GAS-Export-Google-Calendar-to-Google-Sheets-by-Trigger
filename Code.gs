@@ -49,14 +49,10 @@ function first_once_all_export(){ //After the sheet is initialized, set the head
   for (var i=0;i<events.length;i++) {
     var row=sheet.getLastRow()+1;
     var myformula_placeholder = '';
-    // Matching the "header=" entry above, this is the detailed row entry "details=", and must match the number of entries of the GetRange entry below
-    // NOTE: I've had problems with the getVisibility for some older events not having a value, so I've had do add in some NULL text to make sure it does not error
     var details=[[events[i].getId(), events[i].getTitle(), events[i].getDescription(), events[i].getLocation(), events[i].getStartTime(), events[i].getEndTime(), myformula_placeholder, ('' + events[i].getVisibility()), events[i].getDateCreated(), events[i].getLastUpdated(), events[i].getMyStatus(), events[i].getCreators(), events[i].isAllDayEvent(), events[i].isRecurringEvent()]];
     var range=sheet.getRange(row,1,1,14);
     range.setValues(details);
     
-    // Writing formulas from scripts requires that you write the formulas separate from non-formulas
-    // Write the formula out for this specific row in column 7 to match the position of the field myformula_placeholder from above: foumula over columns F-E for time calc
     var cell=sheet.getRange(row,7);
     cell.setFormula('=(HOUR(F' +row+ ')+(MINUTE(F' +row+ ')/60))-(HOUR(E' +row+ ')+(MINUTE(E' +row+ ')/60))');
     cell.setNumberFormat('.00');

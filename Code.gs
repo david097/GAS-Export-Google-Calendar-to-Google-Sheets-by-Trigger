@@ -9,7 +9,7 @@ function onOpen() {
   .createMenu('Export Calendar')
   .addItem('All Schedule (Once)', 'showAlert')
   .addItem('Sort by StartDate', 'sortingByStartDate')
-  .addItem('Sort by Last Updated', 'sortingByLastUpdate') 
+  .addItem('Sort by Last Update', 'sortingByLastUpdate') 
   .addItem('Sort by User', 'sortingByUser')      
   .addToUi();
 }
